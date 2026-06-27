@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8.4
+    container_name: registration-db
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: Pass1234
+      MYSQL_DATABASE: otp_auth
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    networks:
+      - registration-network
+
+  backend:
+    build: ./backend
+    container_name: registration-backend
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/otp_auth
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Pass1234
+
+      SPRING_MAIL_USERNAME: your-email@gmail.com
+      SPRING_MAIL_PASSWORD: your-app-password
+
+    networks:
+      - registration-network
+
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: registration-frontend
+
+    depends_on:
+      - backend
+
+    ports:
+      - "80:80"
+
+    networks:
+      - registration-network
+
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  registration-network:
