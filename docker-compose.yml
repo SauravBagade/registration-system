@@ -36,8 +36,8 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: Pass1234
 
-      SPRING_MAIL_USERNAME: your-email@gmail.com
-      SPRING_MAIL_PASSWORD: your-app-password
+      SPRING_MAIL_USERNAME: sauravbagade@gmail.com
+      SPRING_MAIL_PASSWORD: pnai knih dhwn oraz
 
     networks:
       - registration-network
