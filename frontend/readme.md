@@ -87,22 +87,13 @@ npm install
 Open the Axios configuration file.
 
 ```text
-src/services/api.js
+.env
 ```
 
 Example
 
 ```javascript
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://YOUR_EC2_PUBLIC_IP:8080/api/user",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
-
-export default api;
+VITE_API_URL=http://54.164.208.91:8080/api/user
 ```
 
 Replace:
